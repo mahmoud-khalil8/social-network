@@ -1,0 +1,15 @@
+extends layouts/login-layout.pug
+block content 
+    h1 Login
+    form( method="post")
+        p.errorMessage #{errorMessage}
+        div
+            label(for="email") Email
+            input(type="email", id="email", name="loginEmail",placeholder="Email",required="")
+        div
+            label(for="password") Password
+            input(type="password", id="password", name="loginPassword",placeholder="Password",required="")
+        div
+            input(type="submit", value="Login")
+ 
+        a(href="/register") need an account? register here   
