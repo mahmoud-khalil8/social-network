@@ -1,55 +1,59 @@
-/* login.css */
+/* login-dark.css */
 
 body {
-    background-color: #f8f9fa; /* Set background color */
+    background-color: #121212; /* Dark background color */
+    color: #fff; /* Light text color */
 }
 
 .wrapper {
-    margin-top: 50px; /* Adjust the top margin */
-    max-width: 400px; /* Set maximum width */
+    margin-top: 50px;
+    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
     padding: 20px;
-    background-color: #ffffff; /* Set background color */
-    border-radius: 5px; /* Add border radius for a rounded look */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    background-color: #333; /* Darker background color */
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); /* Lighter box shadow */
 }
 
 form {
-    margin-bottom: 20px; /* Add space below the form */
+    margin-bottom: 20px;
 }
 
 label {
-    font-weight: bold; /* Make labels bold */
+    font-weight: bold;
+    color: #fff; /* Light text color for labels */
 }
 
 input[type="email"],
 input[type="text"],
 input[type="password"],
 input[type="submit"] {
-    width: 100%; /* Make input fields fill the width */
-    padding: 10px; /* Add padding */
-    margin-top: 5px; /* Add space between elements */
-    margin-bottom: 10px; /* Add space between elements */
-    border: 1px solid #ced4da; /* Add border */
-    border-radius: 4px; /* Add border radius */
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #555; /* Darker border color */
+    border-radius: 4px;
+    background-color: #222; /* Darker input background */
+    color: #fff; /* Light text color */
 }
 
 input[type="submit"] {
-    background-color: #007bff; /* Set button background color */
-    color: #fff; /* Set button text color */
-    cursor: pointer; /* Change cursor to pointer */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3; /* Change button background color on hover */
+    background-color: #0056b3;
 }
 
 a {
-    text-decoration: none; /* Remove underline from links */
-    color: #007bff; /* Set link color */
+    text-decoration: none;
+    color: #007bff;
 }
 
 a:hover {
-    color: #0056b3; /* Change link color on hover */
+    color: #0056b3;
 }

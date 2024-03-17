@@ -30,14 +30,38 @@ $("#submitPostButton").click(() => {
         button.prop("disabled", true);
     })
 })
+$(document).on("click",".likeButton",(event) => {
+    var button =$(event.target) 
+    var postId=getPostID(button)
+    
+    if (postId==undefined)return
 
+    $.ajax({
+        url:"/api/posts",
+        type:"PUT",
+        success:(postData)=>{
+            console.log(postData)
+        }
+    })
+})
+function getPostID(elem){
+    var isRoot=elem.hasClass("post");
+    var root= isRoot?elem:elem.closest(".post") 
+    var postId=root.data().id ;
+    return postId
+    
+}
 function createPostHtml(postData) {
-      
+    
     var postedBy = postData.postedBy;
-    var displayName = postedBy.firstName + " " + postedBy.lastName;
-    var timestamp = postData.createdAt;
 
-    return `<div class='post'>
+
+
+    var displayName = postedBy.firstName + " " + postedBy.lastName;
+    
+    var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
+
+    return `<div class='post' data-id='${postData._id}'>
 
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
@@ -64,7 +88,7 @@ function createPostHtml(postData) {
                                 </button>
                             </div>
                             <div class='postButtonContainer'>
-                                <button>
+                                <button class="likeButton">
                                     <i class='far fa-heart'></i>
                                 </button>
                             </div>
@@ -72,4 +96,41 @@ function createPostHtml(postData) {
                     </div>
                 </div>
             </div>`;
+}
+
+function timeDifference(current, previous) {
+
+    var msPerMinute = 60 * 1000;
+    var msPerHour = msPerMinute * 60;
+    var msPerDay = msPerHour * 24;
+    var msPerMonth = msPerDay * 30;
+    var msPerYear = msPerDay * 365;
+
+    var elapsed = current - previous;
+
+    if (elapsed < msPerMinute) {
+        if(elapsed/1000 < 30) return "Just now";
+        
+        return Math.round(elapsed/1000) + ' seconds ago';   
+    }
+
+    else if (elapsed < msPerHour) {
+         return Math.round(elapsed/msPerMinute) + ' minutes ago';   
+    }
+
+    else if (elapsed < msPerDay ) {
+         return Math.round(elapsed/msPerHour ) + ' hours ago';   
+    }
+
+    else if (elapsed < msPerMonth) {
+        return Math.round(elapsed/msPerDay) + ' days ago';   
+    }
+
+    else if (elapsed < msPerYear) {
+        return Math.round(elapsed/msPerMonth) + ' months ago';   
+    }
+
+    else {
+        return Math.round(elapsed/msPerYear ) + ' years ago';   
+    }
 }

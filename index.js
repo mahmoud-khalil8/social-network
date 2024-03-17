@@ -11,7 +11,6 @@ const registerRoute=require('./routes/registerRoute') ;
 const logoutRoute=require('./routes/logout') ;
 
 const postsApi=require('./routes/api/posts') ;
-
 app.set("view engine" ,"pug") ;
 app.set("views","views") ;
 app.use(bodyParser.urlencoded ({extended:true}))
