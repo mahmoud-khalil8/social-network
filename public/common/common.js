@@ -30,36 +30,89 @@ $("#submitPostButton").click(() => {
         button.prop("disabled", true);
     })
 })
-$(document).on("click",".likeButton",(event) => {
-    var button =$(event.target) 
-    var postId=getPostID(button)
+
+$(document).on("click", ".likeButton", (event) => {
+    var button = $(event.target);
+    var postId = getPostIdFromElement(button);
     
-    if (postId==undefined)return
+    if(postId === undefined) return;
 
     $.ajax({
-        url:"/api/posts",
-        type:"PUT",
-        success:(postData)=>{
-            console.log(postData)
+        url: `/api/posts/${postId}/like`,
+        type: "PUT",
+        success: (postData) => {
+            
+            button.find("span").text(postData.likes.length || "");
+
+            if(postData.likes.includes(userLoggedIn._id)) {
+                button.addClass("active");
+            }
+            else {
+                button.removeClass("active");
+            }
+
         }
     })
+
 })
-function getPostID(elem){
-    var isRoot=elem.hasClass("post");
-    var root= isRoot?elem:elem.closest(".post") 
-    var postId=root.data().id ;
-    return postId
+
+$(document).on("click", ".retweetButton", (event) => {
+    var button = $(event.target);
+    var postId = getPostIdFromElement(button);
     
+    if(postId === undefined) return;
+
+    $.ajax({
+        url: `/api/posts/${postId}/retweet`,
+        type: "POST",
+        success: (postData) => {            
+            button.find("span").text(postData.retweetUsers.length || "");
+
+            if(postData.retweetUsers.includes(userLoggedIn._id)) {
+                button.addClass("active");
+            }
+            else {
+                button.removeClass("active");
+            }
+
+        }
+    })
+
+})
+
+function getPostIdFromElement(element) {
+    var isRoot = element.hasClass("post");
+    var rootElement = isRoot == true ? element : element.closest(".post");
+    var postId = rootElement.data().id;
+
+    if(postId === undefined) return alert("Post id undefined");
+
+    return postId;
 }
+
 function createPostHtml(postData) {
+
+    if(postData == null) return alert("post object is null");
+
+    var isRetweet = postData.retweetData.length>0;
+    var retweetedBy = isRetweet ? postData.postedBy.username : null;
+    console.log(postData)
+    postData = isRetweet ? postData.retweetData[0] : postData;
+    console.log(postData)
+
+    console.log(isRetweet);
     
     var postedBy = postData.postedBy;
 
-
+    if(postedBy._id === undefined) {
+        return console.log("User object not populated");
+    }
 
     var displayName = postedBy.firstName + " " + postedBy.lastName;
-    
     var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
+
+    var likeActiveClass = postData.likes.includes(userLoggedIn._id) ? "active" : "";
+    var retweetActiveClass = postData.retweetUsers.includes(userLoggedIn._id) ? "active" : "";
 
     return `<div class='post' data-id='${postData._id}'>
 
@@ -82,14 +135,16 @@ function createPostHtml(postData) {
                                     <i class='far fa-comment'></i>
                                 </button>
                             </div>
-                            <div class='postButtonContainer'>
-                                <button>
+                            <div class='postButtonContainer blue'>
+                                <button class='retweetButton ${retweetActiveClass}'>
                                     <i class='fas fa-retweet'></i>
+                                    <span>${postData.retweetUsers.length || ""}</span>
                                 </button>
                             </div>
-                            <div class='postButtonContainer'>
-                                <button class="likeButton">
+                            <div class='postButtonContainer red'>
+                                <button class='likeButton ${likeActiveClass}'>
                                     <i class='far fa-heart'></i>
+                                    <span>${postData.likes.length || ""}</span>
                                 </button>
                             </div>
                         </div>

@@ -32,6 +32,8 @@ nav {
 
 nav a {
     padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     font-size: 30px;
     width: 55px;
     height: 55px;
@@ -39,7 +41,7 @@ nav a {
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 nav a.blue {
@@ -47,14 +49,15 @@ nav a.blue {
 }
 
 nav a:hover {
-    background-color: #1FA2F1;
-    color: var(--blue);
-    border-radius: 50%;
+    background-color:white;
+    color: black;
+    border-radius: 30%;
 }
+
 .mainContainer {
     padding: 0 var(--spacing);
-    border-left: 1px solid var(--light-grey);
-    border-right: 1px solid var(--light-grey);
+    border-left: 1px solid white;
+    border-right: 1px solid white;
     display: flex;
     flex-direction: column;
 }
@@ -76,36 +79,56 @@ nav a:hover {
 
 .postFormContainer {
     display: flex;
+    flex-direction: column;
+    background-color: var(--dark-grey);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: var(--spacing);
-    border-bottom: 1px solid var(--light-grey);
-    flex-shrink: 0;
+    padding-top: 10px; /* Adjust the top padding to make it smaller */
+    padding-bottom: 10px; /* Adjust the bottom padding to make it smaller */
+    margin-bottom: var(--spacing);
 }
 
 .userImageContainer {
     width: 55px;
     height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: var(--spacing);
 }
 
 .userImageContainer img {
     width: 100%;
-    border-radius: 50%;
-    background-color: var(--light-grey);
+    height: 100%;
+    object-fit: cover;
 }
 
 .textareaContainer {
     flex: 1;
-    padding-left: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .textareaContainer textarea {
     width: 100%;
     min-height: 100px;
-    border: 1px solid var(--light-grey);
-    background-color: var(--dark-grey);
+    border: none;
+    background-color: transparent;
     color: var(--text-color);
     padding: 10px;
     font-size: 16px;
     resize: none;
+    margin-bottom: var(--spacing);
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+button i,
+button span{
+    pointer-events: none;
 }
 
 #submitPostButton {
@@ -127,8 +150,15 @@ nav a:hover {
     flex-direction: column;
     padding: var(--spacing);
     cursor: pointer;
-    border-bottom: 1px solid var(--light-grey);
-    flex-shrink: 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    background-color: var(--dark-grey);
+    margin-bottom: var(--spacing);
+}
+
+.post:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .mainContentContainer {
@@ -138,7 +168,7 @@ nav a:hover {
 }
 
 .postContentContainer {
-    padding-left: var(--spacing);
+    padding: var(--spacing);
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -152,6 +182,12 @@ nav a:hover {
 .displayName {
     font-weight: bold;
     color: var(--text-color);
+}
+
+.postBody {
+    color: var(--text-color);
+    margin-top: 10px;
+    line-height: 1.5;
 }
 
 .postFooter {
@@ -180,19 +216,16 @@ nav a:hover {
     transform: scale(1.1);
 }
 
-.header a:hover {
-    text-decoration: underline;
-}
-
-.header a,
-.header span {
-    padding-right: var(--spacing);
-}
-
 .userImageContainer img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: var(--spacing);
+}
+.postButtonContainer.red button.active{
+    color: rgb(226, 34, 94) ;
+}
+.postButtonContainer.blue button.active{
+    color: #00ffc3 ;
 }

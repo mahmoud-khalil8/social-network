@@ -11,6 +11,7 @@ const registerRoute=require('./routes/registerRoute') ;
 const logoutRoute=require('./routes/logout') ;
 
 const postsApi=require('./routes/api/posts') ;
+const Post = require('./schema/postSchema');
 app.set("view engine" ,"pug") ;
 app.set("views","views") ;
 app.use(bodyParser.urlencoded ({extended:true}))
@@ -32,6 +33,7 @@ app.get('/',middleware.loginMiddleware,(req,res,next)=>{
     var payLoad={
         title:"home page",
         userLoggedIn:req.session.user,
+        userLoggedInJs:JSON.stringify(req.session.user),
     }
     res.status(200).render("home",payLoad) ;
 })
