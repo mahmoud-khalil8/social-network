@@ -229,3 +229,73 @@ button span{
 .postButtonContainer.blue button.active{
     color: #00ffc3 ;
 }
+.abovePost{
+    padding-left: 35px;
+    font-size: 15px;
+    color:rgb(167, 167, 167);
+    margin-bottom: 5px;
+}
+/* Dark-themed modal */
+#exampleModalLong {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+}
+
+.modal-content {
+    background-color: #191919; /* Dark background color */
+    color: #fff; /* Light text color */
+}
+
+.modal-header {
+    border-bottom: 1px solid #777; /* Dark border bottom */
+}  
+
+.modal-body, .modal-footer {
+    padding: 20px; /* Padding for body and footer */
+}
+
+.modal-footer button {
+    color: #fff; /* Light text color for buttons */
+}
+
+.modal-footer button.btn-primary {
+    background-color: #0e539c; /* Primary button color */
+}
+
+.modal-footer button.btn-secondary {
+    background-color: #6c757d; /* Secondary button color */
+}
+
+.modal-footer button.close {
+    color: #fff; /* Light text color for close button */
+}
+button.close {
+  background-color: #222222; /* Background color */
+  color: #ffffff; /* Text color */
+  border: none; /* Remove border */
+  padding: 5px 10px; /* Adjust padding */
+  border-radius: 20%; /* Make it round */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+button.close:hover {
+  background-color: #0c4469; /* Darker background color on hover */
+}
+.modal .postFormContainer{
+
+    border:none;
+    padding:0;
+    padding-top: var(--spacing);
+}
+#submitReplyButton:disabled {
+    background-color: #425c6d;
+    color: var(--dark-grey);
+}
+.modal .post{
+    padding:0 0 var(--spacing ) 0;
+}
+.replyFlag{
+    margin-bottom: 5px;
+}
+.replyFlag a{
+    color: #009dff;
+}

@@ -6,7 +6,8 @@ const postSchema=new schema({
     pinned:{type:Boolean},
     likes:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     retweetUsers:[{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    retweetData:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
+    retweetData:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    replyTo:{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
 
 },{timestamps:true}) ;
 const Post=mongoose.model('Post',postSchema) ;
