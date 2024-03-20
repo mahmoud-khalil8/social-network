@@ -13,7 +13,6 @@ mixin createReplyModal(userLoggedIn)
             .modal-header
                 h1#exampleModalLongTitle.modal-title Reply
                 button.close(type='button', data-dismiss='modal', aria-label='Close') &times;
-                
             .modal-body
                 #postsContainer
                 .postFormContainer
@@ -21,7 +20,21 @@ mixin createReplyModal(userLoggedIn)
                         img(src=userLoggedIn.profilePic, alt="User's profile picture")
                     .textareaContainer
                         textarea#replyTextArea(placeholder="What's happening?")
-
             .modal-footer
                 button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                 button#submitReplyButton.btn.btn-primary(type='button',disabled="") Reply
+mixin deletePostModal()
+    #deleteExampleModalLong.modal.fade.dark(tabindex='-1', role='dialog', aria-labelledby='deleteExampleModalLongTitle', aria-hidden='true')
+      .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+                h1#deleteExampleModalLongTitle.modal-title Delete the post
+                button.close(type='button', data-dismiss='modal', aria-label='Close') &times;
+            .modal-body
+                p Are you sure you want to delete this post?
+            .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                button#submitDeleteButton.btn.btn-primary(type='button') Delete
+mixin createPostModals(userLoggedIn)
+    +createReplyModal(userLoggedIn)
+    +deletePostModal()

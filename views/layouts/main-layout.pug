@@ -12,9 +12,9 @@ html(lang="en")
         script. 
             var userLoggedIn=!{userLoggedInJs}
         .wrapper 
-            .row 
+            .row
                 nav.col-2
-                    a.blue(href="/")
+                    a.blue()
                         i.fa-solid.fa-cat
                     a(href="/")
                         i.fa-solid.fa-house
@@ -35,11 +35,11 @@ html(lang="en")
                     a(href="/logout")
                         i.fa-solid.fa-sign-out-alt
                         
-                .mainContainer.col-10.col-md-8.col-lg-6
+                .mainContainer.col-8.col-md-8.col-lg-6
                     .titleContainer    
                         h1 #{title} 
                     block content 
-                .d-none.d-md-block.col-2  
+                .d-none.d-md-block.col-2
                     span Right Sidebar
         script(src='https://kit.fontawesome.com/bac86be1e9.js' crossorigin='anonymous')
         script(src='https://code.jquery.com/jquery-3.7.1.min.js', integrity='sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=', crossorigin='anonymous')

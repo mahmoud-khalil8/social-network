@@ -278,7 +278,8 @@ button.close {
 }
 
 button.close:hover {
-  background-color: #0c4469; /* Darker background color on hover */
+  background-color: #ffffff; /* Darker background color on hover */
+    color: black;
 }
 .modal .postFormContainer{
 
@@ -298,4 +299,9 @@ button.close:hover {
 }
 .replyFlag a{
     color: #009dff;
+}
+.post.largeFont .postBody,
+.post.largeFont .postFooter{
+    font-size: 20px;
+
 }

@@ -9,6 +9,7 @@ const db=require('./database') ;
 const loginRoute=require('./routes/loginRoute') ;
 const registerRoute=require('./routes/registerRoute') ;
 const logoutRoute=require('./routes/logout') ;
+const postRoute=require('./routes/post') ;
 
 const postsApi=require('./routes/api/posts') ;
 const Post = require('./schema/postSchema');
@@ -24,6 +25,7 @@ app.use(session({
 app.use('/login',loginRoute) ;
 app.use('/register',registerRoute) ;
 app.use('/logout',logoutRoute) ;
+app.use('/post',postRoute) ;
 
 app.use('/api/posts',postsApi) ;
 

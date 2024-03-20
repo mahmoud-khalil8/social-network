@@ -1,6 +1,5 @@
 const express=require('express') ;
 const bodyParser=require('body-parser') ;
-const user=require('../schema/userSchema') ;
 const User = require('../schema/userSchema');
 const app = express() ;
 const router = express.Router();

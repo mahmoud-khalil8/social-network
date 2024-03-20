@@ -1,10 +1,12 @@
 const mongoose=require('mongoose') ;
+const dotenv=require('dotenv') ;
+dotenv.config() ;
 class database{
     constructor(){
         this._connect()
     }
     _connect(){
-        mongoose.connect('mongodb+srv://mahmoudkhalil8g:8uR6WBW6234cd9hX@cluster0.ehsunmi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', 
+        mongoose.connect(process.env.MONGO_URI
         )
         .then(()=>{console.log("connected to database")})
         .catch((err)=>{console.log(err)}) ;

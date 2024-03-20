@@ -19,16 +19,35 @@ $("#exampleModalLong").on("show.bs.modal",(event)=>{
     var postId=getPostIdFromElement(button)
     $('#submitReplyButton').data("id",postId)
     $.get(`/api/posts/${postId}`, results => {
-        results=results[0]
-        outputPosts([results], $("#postsContainer"));
+        outputPosts(results.postData, $("#postsContainer"));
     })
 
 })
+
 $("#exampleModalLong").on("hidden.bs.modal",(event)=>{
     $("#postsContainer").html("")
 
 
 })
+$("#deleteExampleModalLong").on("show.bs.modal",(event)=>{
+    var button = $(event.relatedTarget);
+    var postId=getPostIdFromElement(button)
+    $('#submitDeleteButton').data("id",postId)
+
+
+})
+
+$("#deleteExampleModalLong").click((event)=>{
+    var id=$(event.target).data("id")
+    $.ajax({
+        url: `/api/posts/${id}`,
+        type: "DELETE",
+        success: (postData) => {
+            location.reload();
+        }
+    })
+})
+
 $("#submitPostButton ,#submitReplyButton").click(() => {
     var button = $(event.target);
 
@@ -102,9 +121,20 @@ $(document).on("click", ".retweetButton", (event) => {
             else {
                 button.removeClass("active");
             }
+              location.reload();
+
 
         }
     })
+
+})
+$(document).on("click", ".post", (event) => {
+    var element = $(event.target);
+    var postId = getPostIdFromElement(element);
+
+    if(postId !== undefined && !element.is("button")) {
+        window.location.href = `/post/${postId}`;
+    }
 
 })
 
@@ -118,10 +148,10 @@ function getPostIdFromElement(element) {
     return postId;
 }
 
-function createPostHtml(postData) {
+function createPostHtml(postData,largeFont=false) {
 
     if(postData == null) return alert("post object is null");
-
+    var largeFontClass=largeFont?"largeFont":"";
     var isRetweet = postData.retweetData.length>0;
     var retweetedBy = isRetweet ? postData.postedBy.username : null;
     postData = isRetweet ? postData.retweetData[0] : postData;
@@ -144,7 +174,7 @@ function createPostHtml(postData) {
                     <span>Retweeted by <a href='/profile/${retweetedBy}'> @${retweetedBy}</span>`
     }
     var replyFlag=""
-    if(postData.replyTo) {
+    if(postData.replyTo&& postData.replyTo._id !== undefined) {
         if(!postData.replyTo._id) {
             return alert("Reply to is not populated");
         }
@@ -156,7 +186,14 @@ function createPostHtml(postData) {
                         Replying to <a href='/profile/${replyToUsername}'>@${replyToUsername}<a>
                     </div>`;
     }
-    return `<div class='post' data-id='${postData._id}'>
+
+    var buttons=""
+    if(postData.postedBy._id==userLoggedIn._id){
+        buttons=`<button class='close trash' ,data-id="${postData._id}" data-toggle="modal" data-target="#deleteExampleModalLong"><i class='far fa-trash-alt'></i></button>
+              `
+    }
+
+    return `<div class='post ${largeFontClass}' data-id=${postData._id} >
                 <div class='abovePost'>
                 ${retweetTxt}
                 </div>
@@ -169,6 +206,7 @@ function createPostHtml(postData) {
                             <a href='/profile/${postedBy.username}' class='displayName'>${displayName}</a>
                             <span class='username'>@${postedBy.username}</span>
                             <span class='date'>${timestamp}</span>
+                            ${buttons}
                         </div>
                         ${replyFlag}
                         <div class='postBody'>
@@ -247,4 +285,20 @@ function outputPosts(results, container) {
     if (results.length == 0) {
         container.append("<span class='noResults'>Nothing to show.</span>")
     }
+}
+function outputPostsWithReplies(results, container) {
+    container.html("");
+
+    if(results.replyTo !== undefined && results.replyTo._id !== undefined) {
+        var html = createPostHtml(results.replyTo)
+        container.append(html);
+    }
+
+    var mainPostHtml = createPostHtml(results.postData,true)
+    container.append(mainPostHtml);
+
+    results.replies.forEach(result => {
+        var html = createPostHtml(result)
+        container.append(html);
+    });
 }
