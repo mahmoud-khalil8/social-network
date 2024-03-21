@@ -13,6 +13,7 @@ const postRoute=require('./routes/post') ;
 const profileRoute=require('./routes/profile') ;
 
 const postsApi=require('./routes/api/posts') ;
+const usersApi=require('./routes/api/users') ;
 const Post = require('./schema/postSchema');
 app.set("view engine" ,"pug") ;
 app.set("views","views") ;
@@ -30,6 +31,7 @@ app.use('/post',middleware.loginMiddleware,postRoute) ;
 app.use('/profile',middleware.loginMiddleware,profileRoute) ;
 
 app.use('/api/posts',postsApi) ;
+app.use('/api/users',usersApi) ;
 
 app.use(express.static(path.join(__dirname,"public"))) ;
 
