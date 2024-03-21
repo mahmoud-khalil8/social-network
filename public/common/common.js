@@ -36,7 +36,6 @@ $("#deleteExampleModalLong").on("show.bs.modal",(event)=>{
 
 
 })
-
 $("#deleteExampleModalLong").click((event)=>{
     var id=$(event.target).data("id")
     $.ajax({
@@ -47,7 +46,6 @@ $("#deleteExampleModalLong").click((event)=>{
         }
     })
 })
-
 $("#submitPostButton ,#submitReplyButton").click(() => {
     var button = $(event.target);
 
@@ -63,7 +61,6 @@ $("#submitPostButton ,#submitReplyButton").click(() => {
         if(id == null) return alert("Button id is null");
         data.replyTo = id;
     }
-
     $.post("/api/posts", data, postData => {
 
         if(postData.replyTo) {
@@ -77,7 +74,6 @@ $("#submitPostButton ,#submitReplyButton").click(() => {
         }
     })
 })
-
 $(document).on("click", ".likeButton", (event) => {
     var button = $(event.target);
     var postId = getPostIdFromElement(button);
@@ -102,11 +98,9 @@ $(document).on("click", ".likeButton", (event) => {
     })
 
 })
-
 $(document).on("click", ".retweetButton", (event) => {
     var button = $(event.target);
-    var postId = getPostIdFromElement(button);
-    
+    var postId = getPostIdFromElement(button);  
     if(postId === undefined) return;
 
     $.ajax({
@@ -122,11 +116,8 @@ $(document).on("click", ".retweetButton", (event) => {
                 button.removeClass("active");
             }
               location.reload();
-
-
         }
     })
-
 })
 $(document).on("click", ".post", (event) => {
     var element = $(event.target);
@@ -164,7 +155,7 @@ $(document).on("click", ".followButton", (event) => {
                 followersText=parseInt(followersText);
                 followersLabel.text(followersText+difference); 
             }
-
+            location.reload();
         }
     })
 })

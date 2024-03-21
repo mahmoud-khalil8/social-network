@@ -416,3 +416,23 @@ button.close:hover {
     background-color: white;
     border-bottom: 2px solid white;
 }
+.noResults{
+    padding: var(--spacing);
+}
+.resultsContainer{
+    font-size: 19px;
+    display: flex;
+    flex-direction: column;
+
+}
+.resultsContainer .user{
+    padding: var(--spacing);
+    display: flex;
+    border-bottom: 1px solid rgb(131, 131, 131);
+
+}
+.user .userDetailsContainer{
+    flex:1 ;
+    display: 0 var(--spacing);
+
+}
