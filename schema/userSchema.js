@@ -9,7 +9,9 @@ const userSchema = new schema({
     password: { type: String, required: true } ,
     profilePic: { type: String, default: "/images/profilePic.jpg" },
     likes:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
-    retweets:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }]
+    retweets:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 
 }, { timestamps: true}); 
 const User = mongoose.model('User', userSchema);

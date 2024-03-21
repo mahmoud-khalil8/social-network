@@ -18,7 +18,10 @@ a {
     color: inherit;
     text-decoration: none;
 }
+.wrapper > .row{
+    margin: 0;
 
+}
 a:hover {
     color: var(--hover-color);
 }
@@ -304,4 +307,112 @@ button.close:hover {
 .post.largeFont .postFooter{
     font-size: 20px;
 
+}
+
+
+.profileHeaderContainer  .coverPhotoContainer {
+    position: relative;
+    height: 200px; /* Adjust height as needed */
+    width: 100%;
+    background-color: #1da1f2; /* Default cover photo background color */
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+}
+
+ .profileHeaderContainer  .userImageContainer {
+    position: absolute;
+    bottom: -50px; /* Adjust positioning as needed */
+    left: 20px; /* Adjust positioning as needed */
+    width: 100px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+ .profileHeaderContainer  .userImageContainer img.userImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profileButtonsContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profileButton,.followButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #272a2b;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+.profileButton:hover {
+    background-color: white;
+    color:black;
+}
+
+.followButton:hover {
+    background-color: white;
+    color:black;
+}
+.followButton.following{
+    background-color: #1da1f2;
+    color: white;
+}
+.profileHeaderContainer .userInfoContainer  {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--spacing);
+    margin-top: 20px;
+}
+.followersContainer .value {
+    font-weight: bold;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.followersContainer span:not(.value) {
+    color: rgb(180, 177, 177);
+
+}
+.followersContainer a{
+    margin-right: 15px;
+    
+}
+.followersContainer a:hover{
+    color: white;
+    border-bottom: 1px solid white;
+}
+.tabsContainer{
+    display: flex;
+    border-bottom: 1px solid rgb(131, 131, 131);
+    flex-shrink: 0;
+}
+
+.tab{
+    flex:1;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:var(--light-grey);
+    font-weight: bold;
+}
+.tab.active{
+    color:white;
+    border-bottom: 2px solid white;
+
+}
+
+.tab:hover{
+    color:black;
+    background-color: white;
+    border-bottom: 2px solid white;
 }

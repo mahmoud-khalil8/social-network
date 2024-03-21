@@ -6,8 +6,15 @@ const User = require('../../schema/userSchema');
 const Post = require('../../schema/postSchema');
 
 app.use(bodyParser.urlencoded({ extended: false }));
-router.get("/",async (req, res, next) => {
-    var results =await getPosts({});
+router.get("/", async (req, res, next) => {
+    var searchObj = req.query;
+    if(searchObj.isReply !== undefined) {
+        var isReply = searchObj.isReply == "true";
+        searchObj.replyTo = { $exists: isReply };
+        delete searchObj.isReply;
+    }
+
+    var results = await getPosts(searchObj);
     res.status(200).send(results);
 })
 router.get("/:id", async(req, res, next) => {
@@ -129,6 +136,7 @@ router.post("/:id/retweet", async (req, res, next) => {
     res.status(200).send(post)
 })
 async function  getPosts (id){
+    
     var results =await Post.find(id)
     .populate("postedBy")
     .populate("retweetData")
@@ -139,7 +147,6 @@ async function  getPosts (id){
         
     })
     results=  await User.populate(results, { path: "replyTo.postedBy"});
-
     return  await User.populate(results, { path: "retweetData.postedBy"});
     
 }
