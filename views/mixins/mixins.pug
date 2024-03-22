@@ -51,7 +51,7 @@ mixin changeProfilePictureModal()
       .modal-dialog(role='document')
           .modal-content
             .modal-header
-                h1#changeProfilePictureModalTitle.modal-title Upload new profile picture
+                h3#changeProfilePictureModalTitle.modal-title Upload new profile picture
                 button.close(type='button', data-dismiss='modal', aria-label='Close') &times;
             .modal-body
                 input#fileInput(type='file', accept='image/*')
@@ -60,3 +60,17 @@ mixin changeProfilePictureModal()
             .modal-footer
                 button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
                 button#imageUploadButton.btn.btn-primary(type='button') Save
+mixin changeCoverPhotoModal()
+    #changeCoverPhotoModal.modal.fade.dark(tabindex='-1', role='dialog', aria-labelledby='changeCoverPhotoModalTitle', aria-hidden='true')
+      .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+                h3#changeCoverPhotoModalTitle.modal-title Upload new cover Photo
+                button.close(type='button', data-dismiss='modal', aria-label='Close') &times;
+            .modal-body
+                input#coverPhoto(type='file', accept='image/*')
+                .imagePreviewContainer
+                    img#coverPreview(src='', alt='Image preview')
+            .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+                button#coverPhotoButton.btn.btn-primary(type='button') Save

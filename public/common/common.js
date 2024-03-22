@@ -70,6 +70,28 @@ $("#fileInput").change(function(){
     }
 
 })
+$("#coverPhoto").change(function(){
+    // var input=$(event.target);
+    if(this.files && this.files[0]){
+        var reader=new FileReader();
+        reader.onload=(e)=>{
+            var image=document.getElementById("coverPreview");
+            image.src=e.target.result;
+
+            //$("#imagePreview").attr("src",image.src);
+            if(cropper !== undefined){
+                cropper.destroy();
+            }
+            cropper=new Cropper(image,{
+                aspectRatio:16/9,
+                background:false
+            })
+
+        }  
+        reader.readAsDataURL(this.files[0]);
+    }
+
+})
 
 $("#submitPostButton ,#submitReplyButton").click(() => {
     var button = $(event.target);
@@ -136,6 +158,27 @@ $(document).on("click", "#imageUploadButton", (event) => {
 
         $.ajax({
             url: "/api/users/profilePicture",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: () => location.reload()
+        })
+    })
+})
+$(document).on("click", "#coverPhotoButton", (event) => {
+
+    var canvas = cropper.getCroppedCanvas();
+    if(canvas == null) {
+        return alert("Could not upload image. Make sure it is an image file.");
+    }
+
+    canvas.toBlob((blob) => {
+        var formData = new FormData();
+        formData.append("croppedImage", blob);
+
+        $.ajax({
+            url: "/api/users/coverPhoto",
             type: "POST",
             data: formData,
             processData: false,

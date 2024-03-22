@@ -11,6 +11,9 @@ block content
         - var followingCount=profileUser.following.length
         .profileHeaderContainer 
             .coverPhotoContainer 
+                if profileUser.coverPhoto
+                    img.coverPhoto(src=profileUser.coverPhoto)
+                
 
                 .userImageContainer 
                     img.userImage(src=profileUser.profilePic)
@@ -27,7 +30,9 @@ block content
                 p @#{profileUser.username}
                 span.description #{profileUser.description}
                 if profileUser._id==userLoggedIn._id
-                    button.profilePictureButton(data-toggle="modal", data-target="#changeProfilePictureModal") Change Profile Picture
+                    button.profilePictureButton(data-toggle="modal", data-target="#changeProfilePictureModal") Change Profile Picture &nbsp; 
+                        i.fas.fa-camera
+                    button.coverPhotoButton(data-toggle="modal", data-target="#changeCoverPhotoModal") Change cover photo &nbsp; 
                         i.fas.fa-camera
 
                 .followersContainer
@@ -43,6 +48,7 @@ block content
 
         .postsContainer
         +createPostModals(userLoggedIn)
-        +changeProfilePictureModal
+        +changeProfilePictureModal()
+        +changeCoverPhotoModal()
 block script 
     script(src="/common/profile.js") 

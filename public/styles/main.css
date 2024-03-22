@@ -437,7 +437,19 @@ button.close:hover {
     position: absolute;
     top: -30px; /* Adjust the top position as needed */
     right: 20px; /* Adjust the right position as needed */
-    background-color: var(--primary-color);
+    background-color:#191919;
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.coverPhotoButton{
+    position: absolute;
+    top: -30px; /* Adjust the top position as needed */
+    right: 260px; /* Adjust the right position as needed */
+    background-color:#191919;
     color: var(--text-color);
     border: none;
     border-radius: 5px;
@@ -447,10 +459,20 @@ button.close:hover {
 }
 
 .profilePictureButton:hover {
-    background-color: var(--hover-color);
+    background-color:white;
+    color: black;
 }
-#imagePreview{
+.coverPhotoButton:hover {
+    background-color:white;
+    color:black
+}
+#imagePreview,#coverPreview{
     width:100%;
     display: block;
     max-width: 100%;
+}
+.coverPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
