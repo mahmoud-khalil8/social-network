@@ -10,6 +10,7 @@ const loginRoute=require('./routes/loginRoute') ;
 const registerRoute=require('./routes/registerRoute') ;
 const logoutRoute=require('./routes/logout') ;
 const postRoute=require('./routes/post') ;
+const uploadRoute=require('./routes/upload') ;
 const profileRoute=require('./routes/profile') ;
 
 const postsApi=require('./routes/api/posts') ;
@@ -27,6 +28,7 @@ app.use(session({
 app.use('/login',loginRoute) ;
 app.use('/register',registerRoute) ;
 app.use('/logout',logoutRoute) ;
+app.use('/uploads',uploadRoute) ;
 app.use('/post',middleware.loginMiddleware,postRoute) ;
 app.use('/profile',middleware.loginMiddleware,profileRoute) ;
 

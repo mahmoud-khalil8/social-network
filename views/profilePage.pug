@@ -26,6 +26,9 @@ block content
                 h2 #{profileUser.firstName} #{profileUser.lastName}
                 p @#{profileUser.username}
                 span.description #{profileUser.description}
+                if profileUser._id==userLoggedIn._id
+                    button.profilePictureButton(data-toggle="modal", data-target="#changeProfilePictureModal") Change Profile Picture
+                        i.fas.fa-camera
 
                 .followersContainer
                     a(href=`/profile/${profileUser.username}/following`) 
@@ -40,5 +43,6 @@ block content
 
         .postsContainer
         +createPostModals(userLoggedIn)
+        +changeProfilePictureModal
 block script 
     script(src="/common/profile.js") 

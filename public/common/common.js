@@ -1,3 +1,4 @@
+var cropper;
 $("#postTextarea,#replyTextArea").keyup(event => {
     var textbox = $(event.target);
     var value = textbox.val().trim();
@@ -46,6 +47,30 @@ $("#deleteExampleModalLong").click((event)=>{
         }
     })
 })
+
+$("#fileInput").change(function(){
+    // var input=$(event.target);
+    if(this.files && this.files[0]){
+        var reader=new FileReader();
+        reader.onload=(e)=>{
+            var image=document.getElementById("imagePreview");
+            image.src=e.target.result;
+
+            //$("#imagePreview").attr("src",image.src);
+            if(cropper !== undefined){
+                cropper.destroy();
+            }
+            cropper=new Cropper(image,{
+                aspectRatio:1/1,
+                background:false
+            })
+
+        }  
+        reader.readAsDataURL(this.files[0]);
+    }
+
+})
+
 $("#submitPostButton ,#submitReplyButton").click(() => {
     var button = $(event.target);
 
@@ -97,6 +122,27 @@ $(document).on("click", ".likeButton", (event) => {
         }
     })
 
+})
+$(document).on("click", "#imageUploadButton", (event) => {
+
+    var canvas = cropper.getCroppedCanvas();
+    if(canvas == null) {
+        return alert("Could not upload image. Make sure it is an image file.");
+    }
+
+    canvas.toBlob((blob) => {
+        var formData = new FormData();
+        formData.append("croppedImage", blob);
+
+        $.ajax({
+            url: "/api/users/profilePicture",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: () => location.reload()
+        })
+    })
 })
 $(document).on("click", ".retweetButton", (event) => {
     var button = $(event.target);

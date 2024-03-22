@@ -46,3 +46,17 @@ mixin createTab(name, href, isSelected)
     - className = isSelected ? "tab active" : "tab"
     a(href=href, class=className)
         span #{name}
+mixin changeProfilePictureModal()
+    #changeProfilePictureModal.modal.fade.dark(tabindex='-1', role='dialog', aria-labelledby='changeProfilePictureModalTitle', aria-hidden='true')
+      .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+                h1#changeProfilePictureModalTitle.modal-title Upload new profile picture
+                button.close(type='button', data-dismiss='modal', aria-label='Close') &times;
+            .modal-body
+                input#fileInput(type='file', accept='image/*')
+                .imagePreviewContainer
+                    img#imagePreview(src='', alt='Image preview')
+            .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+                button#imageUploadButton.btn.btn-primary(type='button') Save
