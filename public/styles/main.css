@@ -476,3 +476,85 @@ button.close:hover {
     height: 100%;
     object-fit: cover;
 }
+.searchBarContainer{
+    position: relative;
+    color:var(--light-grey) ;
+    padding:10px var(--spacing) ;
+    
+
+}
+.searchBarContainer i{
+    position: absolute;
+    top:20px ;
+    left:20px ;
+
+}
+.searchBarContainer #searchBox{
+    height: 36px;
+    width: 100%;
+    padding: 5px 15px 5px 40px;
+    border-radius: 20px;
+    border: 1px solid var(--light-grey);
+    background-color:#ebebeb;
+    color: black;
+    font-size: 23px;
+
+}
+.icon{
+    margin-left:  40px;
+    font-size: 30px;
+}
+
+.icon:hover{
+    color: var(--primary-color);
+}
+.chatPageContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+
+}
+.chatTitleBar{
+    border-bottom: 1px solid var(--light-grey);
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    font-size: 22px;
+    padding: 10px var(--spacing);
+
+}
+.chatTitleBar label{
+    margin-right: 10px ;
+}
+#userSearchTextbox{
+    border: none;
+    flex:1 ;
+    font-weight: 200px;
+    min-width: 350px;
+}
+#createChatButton{
+    border:none;
+    background-color:#0e539c;
+    color:white;
+    padding: 7px 20px;
+    margin:10px auto;
+    border-radius: 7px;
+    cursor: pointer;
+
+    
+}
+#createChatButton:disabled{
+    background-color: var(--light-grey);
+    color: var(--dark-grey);
+
+}
+.selectedUser{
+    font-weight: 300;
+    background-color:rgb(158, 197, 255);
+    color: black;
+    padding: 5px;
+    border-radius: 3px;
+    margin: 5px 5px 0 0;
+    display: inline-block;
+
+}

@@ -1,0 +1,11 @@
+extends layouts/main-layout.pug
+
+block content    
+    .chatPageContainer
+        .chatTitleBar 
+            label(for="userSearchTextbox") To: 
+            #selectedUsers 
+                input#userSearchTextbox(type="text", name="",placeholder="Search for a user")
+        .resultsContainer
+        button#createChatButton(disabled)   Create Chat
+

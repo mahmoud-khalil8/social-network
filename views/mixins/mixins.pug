@@ -1,7 +1,7 @@
 mixin createPostForm(userLoggedIn)
     .postFormContainer
         .userImageContainer
-            img(src=userLoggedIn.profilePic, alt="User's profile picture")
+            img(src=`/${userLoggedIn.profilePic}`, alt="User's profile picture")
         .textareaContainer
             textarea#postTextarea(placeholder="What's happening?")
             .buttonsContainer
@@ -17,7 +17,7 @@ mixin createReplyModal(userLoggedIn)
                 #postsContainer
                 .postFormContainer
                     .userImageContainer
-                        img(src=userLoggedIn.profilePic, alt="User's profile picture")
+                        img(src=`/${userLoggedIn.profilePic}`, alt="User's profile picture")
                     .textareaContainer
                         textarea#replyTextArea(placeholder="What's happening?")
             .modal-footer
@@ -42,10 +42,12 @@ mixin createFollowButton(user,isFollowing)
     - text= isFollowing ? "Following" : "Follow"
     - buttonClass= isFollowing ? "followButton following" : "followButton"
     button(class=buttonClass, data-user=user._id) #{text}
+    
 mixin createTab(name, href, isSelected)
     - className = isSelected ? "tab active" : "tab"
     a(href=href, class=className)
         span #{name}
+
 mixin changeProfilePictureModal()
     #changeProfilePictureModal.modal.fade.dark(tabindex='-1', role='dialog', aria-labelledby='changeProfilePictureModalTitle', aria-hidden='true')
       .modal-dialog(role='document')

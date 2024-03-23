@@ -7,16 +7,18 @@ block content
         script. 
             var profileUserId='!{profileUser._id}'
             var selectedTab='!{selectedTab}'
+        
         - var followersCount=profileUser.followers.length
         - var followingCount=profileUser.following.length
         .profileHeaderContainer 
             .coverPhotoContainer 
                 if profileUser.coverPhoto
-                    img.coverPhoto(src=profileUser.coverPhoto)
+                    img.coverPhoto(src=`/${profileUser.coverPhoto}`)
                 
 
                 .userImageContainer 
-                    img.userImage(src=profileUser.profilePic)
+                    script. 
+                    img.userImage(src=`/${profileUser.profilePic}`)
             .profileButtonsContainer 
                 if profileUser._id!=userLoggedIn._id 
                     a.profileButton(href=`/messages/${profileUser._id}`) Send Message

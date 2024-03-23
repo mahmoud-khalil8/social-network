@@ -7,17 +7,19 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get('/',(req,res,next)=>{
     var payload={
-        title:req.session.user.username,
+        pageTitle:"Profile",
         userLoggedIn:req.session.user,
         userLoggedInJs:JSON.stringify(req.session.user),
         profileUser:req.session.user,
         
     }
+    
     res.status(200).render('profilePage',payload) ;
 })
 router.get("/:username", async (req, res, next) => {
 
     var payload = await getPayload(req.params.username, req.session.user);
+    
     
     res.status(200).render("profilePage", payload);
 })
@@ -56,6 +58,7 @@ async function getPayload(username,userLoggedIn){
             }
         }
     }
+    
     return {
         title:user.username,
         userLoggedIn:userLoggedIn,
