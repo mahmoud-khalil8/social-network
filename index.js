@@ -18,6 +18,7 @@ const messagesRoute=require('./routes/messages') ;
 const postsApi=require('./routes/api/posts') ;
 const usersApi=require('./routes/api/users') ;
 const chatsApi=require('./routes/api/chats') ;
+const messagesApi=require('./routes/api/messages') ;
 const Post = require('./schema/postSchema');
 
 app.set("view engine" ,"pug") ;
@@ -43,6 +44,7 @@ app.use('/messages',middleware.loginMiddleware,messagesRoute) ;
 app.use('/api/posts',postsApi) ;
 app.use('/api/users',usersApi) ;
 app.use('/api/chats',chatsApi) ;
+app.use('/api/messages',messagesApi) ;
 
 app.use(express.static(path.join(__dirname,"public"))) ;
 
