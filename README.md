@@ -3,7 +3,15 @@
 
 # Social Network App
 
-This is a social network application built using Node.js, Express.js, MongoDB, and other technologies. It allows users to create accounts, post messages, follow other users, send messages, receive notifications, and more.
+
+
+https://github.com/mahmoud-khalil8/social-network/assets/78821632/453e48ac-d37e-4a6e-82e3-d207cfe3ba52
+
+
+This is 
+
+
+a social network application built using Node.js, Express.js, MongoDB, and other technologies. It allows users to create accounts, post messages, follow other users, send messages, receive notifications, and more.
 
 ## Table of Contents
 
