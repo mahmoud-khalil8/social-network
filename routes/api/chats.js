@@ -61,6 +61,15 @@ router.get("/:chatId", async (req, res, next) => {
         res.sendStatus(400);
     })
 })
+router.put("/:chatId/messages/markAsRead", async (req, res, next) => {
+    
+    Message.updateMany({ chat: req.params.chatId }, { $addToSet: { readBy: req.session.user._id } })
+    .then(() => res.sendStatus(204))
+    .catch(error => {
+        console.log(error);
+        res.sendStatus(400);
+    })
+})
 router.put("/:chatId", async (req, res, next) => {
     Chat.findByIdAndUpdate(req.params.chatId, req.body)
     .then(results => res.sendStatus(204))

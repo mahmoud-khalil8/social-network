@@ -25,6 +25,7 @@ const postsApi=require('./routes/api/posts') ;
 const usersApi=require('./routes/api/users') ;
 const chatsApi=require('./routes/api/chats') ;
 const messagesApi=require('./routes/api/messages') ;
+const notificationsApi=require('./routes/api/notifications') ;
 const Post = require('./schema/postSchema');
 
 app.set("view engine" ,"pug") ;
@@ -52,6 +53,7 @@ app.use('/api/posts',postsApi) ;
 app.use('/api/users',usersApi) ;
 app.use('/api/chats',chatsApi) ;
 app.use('/api/messages',messagesApi) ;
+app.use('/api/notifications',notificationsApi) ;
 
 app.use(express.static(path.join(__dirname,"public"))) ;
 
@@ -78,6 +80,9 @@ io.on('connection',(socket)=>{
     })
     socket.on('stop typing',room=>{
         socket.in(room).emit('stop typing') ;
+    })
+    socket.on('notification received',room=>{
+        socket.in(room).emit('notification received') ;
     })
     socket.on('new message',newMessage=>{
         var chat =newMessage.chat ;

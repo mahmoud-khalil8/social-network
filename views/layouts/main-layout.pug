@@ -25,11 +25,11 @@ html(lang="en")
                         
                     a(href="/notifications")
                         i.fa-solid.fa-bell
-                        
+                        span#notificationBadge 
 
                     a(href="/messages")
                         i.fa-solid.fa-envelope
-                        
+                        span#messagesBadge 
                     a(href="/profile")
                         i.fa-solid.fa-user
                         
@@ -42,6 +42,7 @@ html(lang="en")
                         block headerButton
                     block content 
                 .d-none.d-md-block.col-2
+        #notificationList
         script(src='https://kit.fontawesome.com/bac86be1e9.js' crossorigin='anonymous')
         script(src='https://code.jquery.com/jquery-3.7.1.min.js', integrity='sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=', crossorigin='anonymous')
         script(src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js')

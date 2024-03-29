@@ -7,7 +7,16 @@ const notificationsSchema=new schema({
     opened:{type:Boolean,default:false},
     entityId:{type:mongoose.Schema.Types.ObjectId},
 },{timestamps:true}) ;
-
-const Notifications=mongoose.model('Notifications',notificationsSchema) ;
+notificationsSchema.statics.insertNotification=async(userTo,userFrom,notificationType,entityId)=>{
+    var data={
+        userTo,
+        userFrom,
+        notificationType,
+        entityId,
+    }
+    await Notifications.deleteOne(data).catch(error=>console.log(error));
+    return Notifications.create(data).catch(error=>console.log(error));
+}
+var Notifications=mongoose.model('Notifications',notificationsSchema) ;
 
 module.exports=Notifications;

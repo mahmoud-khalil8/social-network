@@ -4,6 +4,7 @@ const router = express.Router();
 const bodyParser = require("body-parser")
 const User = require('../../schema/userSchema');
 const Post = require('../../schema/postSchema');
+const Notification = require('../../schema/notificationsSchema'); 
 const fs=require('fs') ;
 const path=require('path') ;
 
@@ -31,6 +32,10 @@ router.put("/:userId/follow", async (req, res, next) => {
         console.log(error);
         res.sendStatus(400);
     })
+    if(!isFollowing){
+        await Notification.insertNotification(userId,req.session.user._id,"follow",req.session.user._id) ;
+    }
+
     
     res.status(200).send(req.session.user) ;
 })

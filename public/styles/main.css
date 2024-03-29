@@ -48,6 +48,7 @@ nav {
 }
 
 nav a {
+    position: relative;
     padding: 10px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -583,8 +584,8 @@ button.close:hover {
     border-bottom: 1px solid var(--light-grey);
 }
 .resultListItem:hover{
-    background-color:rgb(200, 200, 200);
-    color: black;
+    background-color:#343434;
+    
 }
 .resultsDetailsContainer{
     display: flex;
@@ -800,4 +801,57 @@ button.close:hover {
 }
 .chatMessages .message.last{
     margin-bottom: 5px;
+}
+.resultListItem.active{
+    background-color:#0d2c4e;
+} 
+.resultListItem .notification *{
+    pointer-events: none;
+}
+#markNotificationsAsOpened{
+    border:none;
+    background-color:#121212;
+    color:white;
+    padding: 7px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+
+    margin-left: auto;
+}
+#markNotificationsAsOpened:hover{
+    border:none;
+    background-color:white;
+    color:#121212;
+
+}
+#notificationBadge,#messagesBadge{
+    background-color: #ff0000;
+    color: white;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    position: absolute;
+    top:0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    border-radius: 20%;
+    font-size: 18px;
+    visibility: hidden;
+}
+#notificationBadge.active,#messagesBadge.active{
+    visibility: visible;
+}
+#notificationList{
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    width: 350px;
+    background-color:white;
+    color: #121212;
+    box-shadow: 0 1px 4px rgba(255, 255, 255, 0.3);
+}
+#notificationList .active{
+    background-color:white;
+    color: #121212;
 }
