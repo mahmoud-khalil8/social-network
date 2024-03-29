@@ -16,8 +16,9 @@ $("#postTextarea,#replyTextArea").keyup(event => {
     }
 
     submitButton.prop("disabled", false);
-}) 
+})
 $("#exampleModalLong").on("show.bs.modal",(event)=>{
+    
     var button = $(event.relatedTarget);
     var postId=getPostIdFromElement(button)
     $('#submitReplyButton').data("id",postId)
@@ -554,4 +555,12 @@ function getOtherChatUsers(users) {
     if(users.length == 1) return users;
 
     return users.filter(user => user._id != userLoggedIn._id);
+}
+function messageReceived(newMessage){
+    if($(".chatContainer").length==0){
+
+    }
+    else{
+        addChatMessageHtml(newMessage)
+    }
 }

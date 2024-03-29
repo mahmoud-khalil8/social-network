@@ -15,7 +15,10 @@ block content
             
             .mainContentContainer
                 .chatContainer
-                    .chatMessages
+                    ul.chatMessages
+
+                    .typingDots 
+                        img(src="/images/loading_dots.gif", alt="Typing dots")
                     .footer
                         textarea.inputTextbox(name="messageInput", placeholder="Type a message...")
                         button.sendMessageButton

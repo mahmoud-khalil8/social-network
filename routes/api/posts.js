@@ -5,8 +5,10 @@ const bodyParser = require("body-parser")
 const User = require('../../schema/userSchema');
 const Post = require('../../schema/postSchema');
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 router.get("/", async (req, res, next) => {
+    
     var searchObj = req.query;
     if(searchObj.isReply !== undefined) {
         var isReply = searchObj.isReply == "true";

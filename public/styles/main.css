@@ -176,6 +176,7 @@ button span{
     flex: 1;
     display: flex;
     padding: var(--spacing);
+    overflow-y: hidden;
 }
 
 .postContentContainer {
@@ -527,6 +528,7 @@ button.close:hover {
     flex-direction: column;
     min-height: 0;
     flex: 1;
+    flex-basis: 0;
 
 }
 .chatTitleBar{
@@ -718,4 +720,84 @@ button.close:hover {
 }
 #chatNameTextbox{
     width:100%;
+}
+.chatMessages .message{
+    padding-bottom: 2px;
+    list-style: none;
+    display: flex;
+    align-items: flex-end;
+    flex-shrink: 0;
+    
+}
+.chatMessages .message .messageBody{
+    background-color: rgb(220, 220, 220);
+    color:#121212 ;
+    padding: 12px 12px;
+    border-radius: 18px;
+    font-size: 14px;
+
+
+}
+.chatMessages .message .messageContainer{
+    display: flex;
+    flex-direction: column;
+    max-width: 55%;
+}
+.chatMessages .message.mine .messageContainer{
+    align-items: flex-end;
+}
+.chatMessages .message.theirs .messageContainer{
+    align-items: flex-start;
+}
+.chatMessages .message.mine{
+    flex-direction: row-reverse;
+
+}
+.typingDots img,
+.chatMessages .message.mine .messageBody{
+    background-color:#0e539c;
+    color: white;
+    padding: 12px 12px;
+    border-radius: 18px;
+    font-size: 14px;
+
+
+}
+.typingDots img{
+    height: 40px;
+}
+.typingDots{
+    padding: var(--spacing) ;
+    padding-bottom:0 ;
+    display: none;
+}
+.chatMessages .message.mine.first .messageBody{
+    border-bottom-right-radius:2px ;
+}
+.chatMessages .message.mine:not(.first):not(.last) .messageBody{
+    border-bottom-right-radius:2px ;
+    border-top-right-radius:2px ;
+}
+.chatMessages .message.mine.last  .messageBody{
+    border-bottom-right-radius:18px ;
+}
+.chatMessages .message.mine.last:not(.first) .messageBody{
+    border-top-right-radius:2px ;
+}
+.senderName{
+    color: rgba(255, 255, 255, 0.5);
+}
+.chatMessages .imageContainer{
+    height: 40px;
+    width: 40px;
+    margin-right: 7px;
+
+}
+.chatMessages img{
+    height: 100%;
+    border-radius: 50%;
+    vertical-align: bottom;
+}
+.chatMessages .message.last{
+    margin-bottom: 5px;
 }

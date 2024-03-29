@@ -6,6 +6,11 @@ const bodyParser=require('body-parser') ;
 const session=require('express-session') ;
 const db=require('./database') ;
 
+
+const server=app.listen(3000,()=>{console.log("app listening on port 3000")}) ;
+const io=require('socket.io')(server,{pingTimeout:60000}) ;
+
+
 const loginRoute=require('./routes/loginRoute') ;
 const registerRoute=require('./routes/registerRoute') ;
 const logoutRoute=require('./routes/logout') ;
@@ -14,6 +19,7 @@ const uploadRoute=require('./routes/upload') ;
 const profileRoute=require('./routes/profile') ;
 const searchRoute=require('./routes/search') ;
 const messagesRoute=require('./routes/messages') ;
+const notificationsRoute=require('./routes/notifications') ;
 
 const postsApi=require('./routes/api/posts') ;
 const usersApi=require('./routes/api/users') ;
@@ -40,6 +46,7 @@ app.use('/search',middleware.loginMiddleware,searchRoute) ;
 app.use('/post',middleware.loginMiddleware,postRoute) ;
 app.use('/profile',middleware.loginMiddleware,profileRoute) ;
 app.use('/messages',middleware.loginMiddleware,messagesRoute) ;
+app.use('/notifications',middleware.loginMiddleware,notificationsRoute) ;
 
 app.use('/api/posts',postsApi) ;
 app.use('/api/users',usersApi) ;
@@ -56,4 +63,32 @@ app.get('/',middleware.loginMiddleware,(req,res,next)=>{
     }
     res.status(200).render("home",payLoad) ;
 })
-app.listen(3000,()=>{console.log("app listening on port 3000")}) ;
+
+io.on('connection',(socket)=>{
+    socket.on('setup',userData=>{
+        socket.join(userData._id) ;
+        socket.emit('connected') ;
+    })
+    socket.on('join room',room=>{
+        socket.join(room) ;
+    })
+    socket.on('typing',room=>{
+        //emitting only to the room
+        socket.in(room).emit('typing') ;
+    })
+    socket.on('stop typing',room=>{
+        socket.in(room).emit('stop typing') ;
+    })
+    socket.on('new message',newMessage=>{
+        var chat =newMessage.chat ;
+        //emitting to all users in the chat to their own rooms except the sender
+        
+        if(!chat.users) return console.log("chat.users not defined") ;
+
+        chat.users.forEach(user=>{
+            if(user._id==newMessage.sender._id) return ;
+            socket.in(user._id).emit('message received',newMessage) ;
+        })
+    })
+
+})
